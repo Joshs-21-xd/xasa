@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>100 Cosas que me gustan de ti</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f0f8ff;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      color: #d63384;
+    }
+
+    h1, h2 {
+      margin: 40px 20px 20px;
+    }
+
+    button {
+      background-color: #ff66a3;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      margin-top: 30px;
+    }
+
+    .lista {
+      max-width: 700px;
+      margin: 20px auto;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .item {
+      background: #fff0f5;
+      border-radius: 15px;
+      padding: 10px 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: showItem 0.5s ease forwards;
+      text-align: left;
+    }
+
+    .razon-titulo {
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-bottom: 5px;
+      color: #c2185b;
+    }
+
+    .poema-texto {
+      font-style: italic;
+      font-size: 0.95em;
+      line-height: 1.4;
+      white-space: pre-line;
+    }
+
+    @keyframes latido {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .corazon-palpitante {
+      display: inline-block;
+      animation: latido 1s infinite alternate;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes showItem {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<audio id="musicaDeFondo" src="https://github.com/jesuxzx/Proyecto-/raw/0bc5794d80c5b528fd30a0a144196b3ec5ead152/yung%20kai%20-%20blue%20(sub.%20espa%C3%B1ol%20%2B%20lyrics).mp3" loop autoplay></audio>
+
+<h1>Cosas que me gustan de ti <span class="corazon-palpitante">💓</span></h1>
+
+<div id="primeraParte">
+  <h2>
+    1. Tu sonrisa<br>
+    2. Tus ojos<br>
+    3. Tu forma de hablar<br>
+    4. Cómo me haces sentir<br>
+    5. Tu ternura
+  </h2>
+  <button onclick="mostrarSorpresa()">Da click aquí</button>
+</div>
+
+<div id="segundaParte" style="display:none;">
+  <h1>¿En serio crees que son solo 5?</h1>
+  <button onclick="mostrarLista()">Aquí van mas cosas que me encantan de ti</button>
+</div>
+
+<div id="lista" class="lista"></div>
+
+<script>
+const cosas = [
+  { razon: "Tu sonrisa", poema: "Mocosa, tu sonrisa tiene la magia de arreglar mis días." },
+  { razon: "Tus ojos", poema: "Cuando me miras, todo se calma." },
+  { razon: "Tu forma de hablar", poema: "Hablas bonito, incluso cuando no te das cuenta." },
+  { razon: "Cómo me haces sentir", poema: "A tu lado me siento en casa." },
+  { razon: "Tu ternura", poema: "Eres suave incluso cuando eres fuerte." },
+
+  { razon: "Tu risa", poema: "Tu risa siempre llega en el momento correcto." },
+  { razon: "Tu forma de abrazar", poema: "Abrazarte es olvidar el ruido del mundo." },
+  { razon: "Tu paciencia", poema: "Sabes esperar sin hacerme sentir presión." },
+  { razon: "Tu forma de escuchar", poema: "Escuchas con el corazón." },
+  { razon: "Tu mirada distraída", poema: "Cuando te pierdes en tus pensamientos te ves aún más linda." },
+
+  { razon: "Tu apoyo", poema: "Siempre estás, incluso sin que te lo pida." },
+  { razon: "Tu honestidad", poema: "Dices la verdad con cariño." },
+  { razon: "Tu sensibilidad", poema: "Sientes profundo y eso es hermoso." },
+  { razon: "Tu presencia", poema: "Con solo estar, haces que todo mejore." },
+  { razon: "Tu energía", poema: "Tienes una luz que contagia." },
+
+  { razon: "Cómo me haces reír", poema: "Contigo siempre hay risas." },
+  { razon: "Tu forma de querer", poema: "Quieres bonito y de verdad." },
+  { razon: "Tu empatía", poema: "Sientes lo que otros sienten." },
+  { razon: "Tu cuidado", poema: "Siempre piensas en los demás." },
+  { razon: "Tu voz", poema: "Escucharte me tranquiliza." },
+
+  { razon: "Tu sinceridad", poema: "Contigo no hay máscaras." },
+  { razon: "Tu humildad", poema: "Nunca necesitas presumir." },
+  { razon: "Tu dulzura", poema: "No fuerzas nada, simplemente eres así." },
+  { razon: "Tu respeto", poema: "Siempre respetas mis tiempos." },
+  { razon: "Tu comprensión", poema: "Intentas entender antes de juzgar." },
+
+  { razon: "Tu sonrisa tímida", poema: "Esa que aparece sin aviso." },
+  { razon: "Cómo dices mi nombre", poema: "En tu voz suena diferente." },
+  { razon: "Tu ternura diaria", poema: "Hasta en lo simple eres especial." },
+  { razon: "Tu calma", poema: "Me das paz." },
+  { razon: "Tu forma de estar", poema: "No necesitas hacer nada para ser suficiente." },
+
+  { razon: "Tu apoyo silencioso", poema: "A veces no dices nada, pero estás." },
+  { razon: "Tu cariño inesperado", poema: "Siempre llega cuando más lo necesito." },
+  { razon: "Tu paciencia conmigo", poema: "Gracias por quedarte incluso en días difíciles." },
+  { razon: "Tu manera de quererme", poema: "Me quieres tal como soy." },
+  { razon: "Tu sencillez", poema: "Lo simple contigo es perfecto." },
+
+  { razon: "Tu forma de demostrar amor", poema: "No necesitas grandes gestos." },
+  { razon: "Tu dulzura al hablar", poema: "Hablas bonito incluso cuando estás seria." },
+  { razon: "Tu comprensión silenciosa", poema: "Me entiendes sin palabras." },
+  { razon: "Tu forma de mirarme", poema: "A veces dices más con los ojos." },
+  { razon: "Tu presencia constante", poema: "Nunca me siento solo contigo." },
+
+  { razon: "Tu forma de estar conmigo", poema: "Me haces sentir elegido." },
+  { razon: "Tu ternura infinita", poema: "Siempre tienes amor para dar." },
+  { razon: "Tu cariño", poema: "Se siente real." },
+  { razon: "Tu apoyo", poema: "Siempre sumas." },
+  { razon: "Tu existencia", poema: "Gracias por existir, Mocosa." }
+];
+
+function reproducirMusica() {
+  const musica = document.getElementById('musicaDeFondo');
+  if (musica) musica.play().catch(()=>{});
+}
+
+function mostrarSorpresa() {
+  document.getElementById("primeraParte").style.display = "none";
+  document.getElementById("segundaParte").style.display = "block";
+}
+
+function mostrarLista() {
+  const lista = document.getElementById("lista");
+  lista.style.display = "flex";
+
+  cosas.forEach((itemData, i) => {
+    setTimeout(() => {
+      const item = document.createElement("div");
+      item.className = "item";
+
+      const razonElement = document.createElement("div");
+      razonElement.className = "razon-titulo";
+      razonElement.textContent = `${i + 1}. ${itemData.razon}`;
+
+      const poemaElement = document.createElement("div");
+      poemaElement.className = "poema-texto";
+      poemaElement.textContent = itemData.poema;
+
+      item.appendChild(razonElement);
+      item.appendChild(poemaElement);
+      lista.appendChild(item);
+    }, i * 200);
+  });
+
+  document.getElementById("segundaParte").style.display = "none";
+  reproducirMusica();
+}
+</script>
+
+</body>
+</html>
